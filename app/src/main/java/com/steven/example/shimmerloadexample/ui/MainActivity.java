@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     mAdapter.notifyDataSetChanged();
                     mShimmerLayout.stopShimmerAnimation();
                     mShimmerLayout.setVisibility(View.GONE);
+                    mRecyclerView.smoothScrollToPosition(0);
                 }
             }
 
