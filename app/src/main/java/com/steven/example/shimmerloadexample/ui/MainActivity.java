@@ -55,21 +55,15 @@ public class MainActivity extends AppCompatActivity {
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                fetchData();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                fetchData();
                 return false;
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mShimmerLayout.startShimmerAnimation();
     }
 
     @Override
@@ -79,9 +73,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchData() {
+        mShimmerLayout.setVisibility(View.VISIBLE);
+        mShimmerLayout.startShimmerAnimation();
         String keyword = mSearchView.getQuery().toString();
         keyword = keyword.replace(" ", "+");
-        RetrofitSingleton.getInstance().getRestAPI().searchTitle(keyword, 1, Config.API_KEY).enqueue(new Callback<SearchMovie>() {
+        RetrofitSingleton.getInstance().getRestAPI().searchTitle("black+panther", 1, Config.API_KEY).enqueue(new Callback<SearchMovie>() {
+            @SuppressWarnings("ConstantConditions")
             @Override
             public void onResponse(@NonNull Call<SearchMovie> call, @NonNull Response<SearchMovie> response) {
                 if (response.isSuccessful()) {
