@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         mShimmerLayout.startShimmerAnimation();
         String keyword = mSearchView.getQuery().toString();
         keyword = keyword.replace(" ", "+");
-        RetrofitSingleton.getInstance().getRestAPI().searchTitle("black+panther", 1, Config.API_KEY).enqueue(new Callback<SearchMovie>() {
+        RetrofitSingleton.getInstance().getRestAPI().searchTitle(keyword, 1, Config.API_KEY).enqueue(new Callback<SearchMovie>() {
             @SuppressWarnings("ConstantConditions")
             @Override
             public void onResponse(@NonNull Call<SearchMovie> call, @NonNull Response<SearchMovie> response) {
